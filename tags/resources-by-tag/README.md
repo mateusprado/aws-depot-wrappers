@@ -24,6 +24,6 @@ TagFilters=[
 ### Output file format
 ```bash
 resource,Tag: Name
-arn:aws:ec2:us-east-1:AWSACCOUNT:instance/i-0e15fe4145c50e677,devlopment-instance
+arn:aws:ec2:us-east-1:AWSACCOUNT:instance/i-0e15fe4145c50e677,development-instance
 arn:aws:ec2:us-east-1:AWSACCOUNT:instance/i-0ee8c3c33f5c4ebb6,aws-cloud9-mprado-workspace-2e43625b2b2c4fb3bb4263387269e293
 ```

@@ -3,22 +3,33 @@ import csv
 
 client = boto3.client('resourcegroupstaggingapi')
 
-tags_to_export = ['string']
+tags_to_export = ['Env']
+resource_filter = []
 
 print('Starting request to TaggingAPI...')
 response = client.get_resources(
-    TagFilters=[
-        {"Key": "string"}
-    ],
-    ResourceTypeFilters=[
-        "service:resource"
-    ]
+    ResourceTypeFilters=resource_filter
 )
 
 resources_export = []
 resources = response['ResourceTagMappingList']
 header = ['resource']
 tags_discovered = []
+has_token = True
+
+if response['PaginationToken']:
+    while has_token:
+        response = client.get_resources(
+            PaginationToken=response['PaginationToken'],
+            ResourceTypeFilters=resource_filter
+        )
+
+        for r in response['ResourceTagMappingList']:
+            resources.append(r)
+
+        if not response['PaginationToken']:
+            has_token = False
+
 
 for r in resources:
     resource = {}
